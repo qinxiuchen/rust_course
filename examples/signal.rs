@@ -1,22 +1,22 @@
 use std::time::Duration;
 
 fn main() {
-    let light = SignalLight::Red;
-    println!("red duration is {:?}", SignalLight::working_duration(light));
+    let red = SignalLight::Red;
+    println!("red duration is {:?}", red.working_duration());
     let yellow = SignalLight::Yellow;
     println!(
         "yellow duration is {:?}",
-        SignalLight::working_duration(yellow)
+        yellow.working_duration()
     );
     let green = SignalLight::Green;
     println!(
         "green duration is {:?}",
-        SignalLight::working_duration(green)
+        green.working_duration()
     );
 }
 
 trait TSignal {
-    fn working_duration(s: Self) -> Duration;
+    fn working_duration(&self) -> Duration;
 }
 
 enum SignalLight {
@@ -26,8 +26,8 @@ enum SignalLight {
 }
 
 impl TSignal for SignalLight {
-    fn working_duration(s: Self) -> Duration {
-        let duration = match s {
+    fn working_duration(&self) -> Duration {
+        let duration = match self {
             SignalLight::Red => 30,
             SignalLight::Yellow => 5,
             SignalLight::Green => 60,
